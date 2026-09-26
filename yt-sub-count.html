@@ -7,34 +7,45 @@
   html, body {
     margin: 0;
     padding: 0;
+    width: 1920px;
+    height: 1080px;
     background: #ffffff;
     overflow: hidden;
+  }
+  #page {
+    width: 1920px;
+    height: 1080px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   #wrap {
     display: inline-flex;
     align-items: center;
-    gap: 14px;
+    gap: 60px;
     font-family: 'Arial', sans-serif;
     color: #000000;
-    padding: 10px 22px;
   }
   #icon {
-    width: 40px;
-    height: 40px;
+    width: 260px;
+    height: 260px;
     flex-shrink: 0;
   }
   #countWrap {
     position: relative;
     overflow: hidden;
-    height: 58px;
+    height: 340px;
+    width: 1300px;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
   }
   #count {
-    font-size: 48px;
+    font-size: 300px;
     font-weight: 800;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     display: inline-block;
+    white-space: nowrap;
   }
   #count.slide-up {
     animation: slideUp 0.5s ease;
@@ -56,12 +67,14 @@
 </head>
 <body>
 
+<div id="page">
 <div id="wrap">
   <svg id="icon" viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg">
     <path fill="#FF0000" d="M27.4 3.1c-.3-1.2-1.3-2.2-2.5-2.5C22.7.1 14 .1 14 .1s-8.7 0-10.9.5C1.9.9.9 1.9.6 3.1 0 5.3 0 10 0 10s0 4.7.6 6.9c.3 1.2 1.3 2.2 2.5 2.5C5.3 19.9 14 19.9 14 19.9s8.7 0 10.9-.5c1.2-.3 2.2-1.3 2.5-2.5.6-2.2.6-6.9.6-6.9s0-4.7-.6-6.9z"/>
     <path fill="#FFFFFF" d="M11.2 14.3l7.3-4.3-7.3-4.3v8.6z"/>
   </svg>
   <div id="countWrap"><div id="count">–</div></div>
+</div>
 </div>
 
 <script>
