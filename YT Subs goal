@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>YT Subs Goal</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 1920px;
+    height: 1080px;
+    background: transparent;
+    overflow: hidden;
+  }
+  #page {
+    width: 1920px;
+    height: 1080px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #countWrap {
+    position: relative;
+    overflow: hidden;
+    height: 750px;
+    width: 1850px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #count {
+    font-family: 'Arial', sans-serif;
+    font-size: 650px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    display: inline-block;
+    white-space: nowrap;
+    color: #ffffff;
+    -webkit-text-stroke: 3px #000000;
+    paint-order: stroke fill;
+  }
+</style>
+</head>
+<body>
+
+<div id="page">
+  <div id="countWrap"><div id="count">00/30</div></div>
+</div>
+
+<script>
+  const CHANNEL_ID = "UCePDJj21guy5eNXE3ZDPltw";
+  const API_KEY = "AIzaSyAuyY03TfZ7QCHffuKOn3TGl-obDyJia_g";
+  const GOAL = 30;
+  const REFRESH_MS = 60000; // 60 seconds
+
+  let baseline = null;
+
+  async function fetchSubCount() {
+    try {
+      const url = `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      const count = parseInt(data.items[0].statistics.subscriberCount, 10);
+
+      if (baseline === null) baseline = count; // set starting point when page first loads
+
+      const gained = Math.max(0, count - baseline);
+      const el = document.getElementById("count");
+      el.textContent = `${String(gained).padStart(2, '0')}/${GOAL}`;
+    } catch (e) {
+      console.error("Failed to fetch subscriber count:", e);
+    }
+  }
+
+  fetchSubCount();
+  setInterval(fetchSubCount, REFRESH_MS);
+</script>
+
+</body>
+</html>
